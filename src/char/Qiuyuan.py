@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：仇远
 class Qiuyuan(BaseChar):
     def do_perform(self):
         if self.has_intro:

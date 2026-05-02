@@ -1,6 +1,7 @@
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：丹瑾
 class Danjin(BaseChar):
 
     def __init__(self, *args, **kwargs):

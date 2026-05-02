@@ -2,6 +2,7 @@ import time
 from src.char.BaseChar import BaseChar, Elements
 
 
+# 中文名：漂泊者·湮灭/主角/暗主/风主/光主
 class HavocRover(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

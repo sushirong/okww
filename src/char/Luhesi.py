@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar, Priority
 
 
+# 中文名：陆·赫斯
 class Luhesi(BaseChar):
 
     def __init__(self, *args, **kwargs):

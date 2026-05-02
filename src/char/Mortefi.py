@@ -1,6 +1,7 @@
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：莫特斐
 class Mortefi(BaseChar):
     def do_perform(self):
         self.wait_down()

@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：千咲
 class Chisa(BaseChar):
 
     def do_perform(self):

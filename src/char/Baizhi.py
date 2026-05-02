@@ -1,6 +1,7 @@
 from src.char.Healer import Healer
 
 
+# 中文名：白芷
 class Baizhi(Healer):
 
     def do_perform(self):

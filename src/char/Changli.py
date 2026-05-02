@@ -2,10 +2,12 @@ import time
 import cv2
 import numpy as np
 
+import src.char.DragonPhoenixCombo as dragon_phoenix
 from ok import color_range_to_bound
 from src.char.BaseChar import BaseChar, Priority, forte_white_color
 
 
+# 中文名：长离
 class Changli(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -16,6 +18,11 @@ class Changli(BaseChar):
         self.enhanced_normal = False
 
     def do_perform(self):
+        phase = dragon_phoenix.phase_for(self)
+        if phase:
+            return self.do_dragon_phoenix_perform(phase)
+        if dragon_phoenix.should_yield(self):
+            return self.switch_next_char()
         outro = False
         forte = -1
         self.check_f_on_switch = True
@@ -157,9 +164,50 @@ class Changli(BaseChar):
         return clicked
 
     def do_get_switch_priority(self, current_char: BaseChar, has_intro=False, target_low_con=False):
+        priority = dragon_phoenix.priority_for(self, current_char)
+        if priority is not None:
+            return priority
         if has_intro and current_char.char_name in {'char_brant'}:
             return Priority.MAX
         return super().do_get_switch_priority(current_char, has_intro)
+
+    def do_dragon_phoenix_perform(self, phase):
+        """执行龙凤维队伍中的长离手法。"""
+        self.logger.info(f'DragonPhoenix Changli phase={phase}')
+        self.enhanced_normal = False
+        if phase == dragon_phoenix.START_CHANGLI_BURST:
+            # 启动轴的长离只负责 R 接重击，重击出手后切维里奈。
+            self.dragon_phoenix_liberation_heavy()
+        else:
+            # 常规长离轴按 A E A E A 长A 执行，E 不可用时发送按键兜底。
+            self.click()
+            self.sleep(0.12)
+            self.dragon_phoenix_resonance()
+            self.click()
+            self.sleep(0.12)
+            self.dragon_phoenix_resonance()
+            self.click()
+            self.sleep(0.12)
+            self.heavy_attack(0.45)
+            if phase == dragon_phoenix.LOOP_CHANGLI and self.liberation_available():
+                # 循环轴中长离大招可用时追加 R 接重击。
+                self.dragon_phoenix_liberation_heavy()
+        dragon_phoenix.complete(self.task)
+        self.switch_next_char()
+
+    def dragon_phoenix_liberation_heavy(self):
+        """释放长离大招并接重击，技能不可用时保留重击动作。"""
+        if not self.liberation_and_heavy(wait_if_cd_ready=0):
+            self.heavy_attack(0.45)
+
+    def dragon_phoenix_resonance(self):
+        """按长离短 E 逻辑释放共鸣技能。"""
+        if not self.flick_resonance(time_out=0.35, send_click=False):
+            dragon_phoenix.cast_resonance(self, time_out=0.7)
+
+    def on_combat_end(self, chars):
+        """战斗结束时重置龙凤维手法进度。"""
+        dragon_phoenix.reset(self.task)
 
     def flick_resonance(self, time_out=0.2, send_click=True):
         if send_click and self.resonance_available():

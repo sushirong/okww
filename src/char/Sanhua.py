@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：散华
 class Sanhua(BaseChar):
     def do_perform(self):
         liber_clicked = False
