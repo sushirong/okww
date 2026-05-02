@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar, Priority
 
 
+# 中文名：西格莉卡
 class Xigelika(BaseChar):
 
     def __init__(self, *args, **kwargs):

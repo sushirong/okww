@@ -1,6 +1,7 @@
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：卡卡罗
 class Calcharo(BaseChar):
     def do_perform(self):
         if self.has_intro:

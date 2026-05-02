@@ -1,6 +1,7 @@
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：炽霞
 class Chixia(BaseChar):
 
     def __init__(self, *args, **kwargs):

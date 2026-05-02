@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 
 
+# 中文名：椿
 class Camellya(BaseChar):
 
     def __init__(self, *args, **kwargs):

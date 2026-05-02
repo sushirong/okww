@@ -3,6 +3,7 @@ import numpy as np
 from src.char.BaseChar import BaseChar, Priority, forte_white_color
 
 
+# 中文名：卡提希娅/卡提
 class Cartethyia(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

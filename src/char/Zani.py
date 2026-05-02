@@ -16,6 +16,7 @@ class State(Enum):
     INTERRUPTED = 5
 
 
+# 中文名：赞妮
 class Zani(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

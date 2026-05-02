@@ -5,6 +5,7 @@ from ok import color_range_to_bound
 from src.char.BaseChar import BaseChar, Priority
 
 
+# 中文名：夏空
 class Ciaccona(BaseChar):
 
     def __init__(self, *args, **kwargs):

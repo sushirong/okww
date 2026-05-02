@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar, Priority
 
 
+# 中文名：弗洛洛
 class Phrolova(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

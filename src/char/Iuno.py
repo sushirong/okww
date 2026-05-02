@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar, Priority
 
 
+# 中文名：尤诺
 class Iuno(BaseChar):
 
     def __init__(self, *args, **kwargs):

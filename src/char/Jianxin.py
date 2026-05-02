@@ -1,6 +1,7 @@
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：鉴心
 class Jianxin(BaseChar):
     def do_perform(self):
         if self.has_intro:

@@ -3,6 +3,7 @@ import time
 from src.char.Healer import Healer
 
 
+# 中文名：卜灵
 class Douling(Healer):
 
     def do_perform(self):

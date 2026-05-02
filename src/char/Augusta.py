@@ -9,6 +9,7 @@ from src.char.BaseChar import BaseChar
 switch_time = 3
 
 
+# 中文名：奥古斯塔
 class Augusta(BaseChar):
     def do_perform(self):
         time_out = switch_time

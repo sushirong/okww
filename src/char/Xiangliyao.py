@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：相里要
 class Xiangliyao(BaseChar):
 
     def __init__(self, *args, **kwargs):

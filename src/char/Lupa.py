@@ -6,6 +6,7 @@ from ok import color_range_to_bound
 from src.char.BaseChar import BaseChar, Priority
 
 
+# 中文名：露帕
 class Lupa(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

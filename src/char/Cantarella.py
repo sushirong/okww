@@ -2,6 +2,7 @@ import time
 from src.char.BaseChar import BaseChar, forte_white_color, Priority
 
 
+# 中文名：坎特蕾拉
 class Cantarella(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

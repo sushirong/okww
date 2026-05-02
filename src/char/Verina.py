@@ -2,10 +2,12 @@ import time
 import cv2
 import numpy as np
 
+import src.char.DragonPhoenixCombo as dragon_phoenix
 from src.char.Healer import Healer, Priority
 from ok import color_range_to_bound
 
 
+# 中文名：维里奈
 class Verina(Healer):
     def judge_frequncy_and_amplitude(self, gray, min_freq, max_freq, min_amp):
         height, width = gray.shape[:]
@@ -48,6 +50,9 @@ class Verina(Healer):
         return forte
 
     def do_get_switch_priority(self, current_char, has_intro=False, target_low_con=False):
+        priority = dragon_phoenix.priority_for(self, current_char)
+        if priority is not None:
+            return priority
         if isinstance(current_char, Healer):
             return Priority.MIN
         if self.last_res > 0 and self.time_elapsed_accounting_for_freeze(self.last_res) < self.res_cd:
@@ -127,6 +132,11 @@ class Verina(Healer):
             self.current_forte_energy = 0
 
     def do_perform(self):
+        phase = dragon_phoenix.phase_for(self)
+        if phase:
+            return self.do_dragon_phoenix_perform(phase)
+        if dragon_phoenix.should_yield(self):
+            return self.switch_next_char()
         if self.has_intro:
             self.sleep(0.8)
         else:
@@ -146,6 +156,26 @@ class Verina(Healer):
         self._consume_forte_energy()
         
         self.switch_next_char()
+
+    def do_dragon_phoenix_perform(self, phase):
+        """执行龙凤维队伍中的维里奈手法。"""
+        use_liberation = phase in {dragon_phoenix.START_VERINA_FULL, dragon_phoenix.LOOP_VERINA}
+        self.logger.info(f'DragonPhoenix Verina phase={phase} use_liberation={use_liberation}')
+        if use_liberation:
+            # R 轴用于补充队伍增益，启动完整轴与循环轴都会尝试释放。
+            dragon_phoenix.cast_liberation(self)
+        dragon_phoenix.cast_resonance(self, time_out=1.2)
+        dragon_phoenix.cast_echo(self)
+        self.task.jump(after_sleep=0.05)
+        dragon_phoenix.tap_attack(self, 3)
+        # 协奏未满时继续短普攻，满协奏会立刻进入今汐。
+        self.continues_normal_attack(0.7, interval=0.1, until_con_full=True)
+        dragon_phoenix.complete(self.task)
+        self.switch_next_char()
+
+    def on_combat_end(self, chars):
+        """战斗结束时重置龙凤维手法进度。"""
+        dragon_phoenix.reset(self.task)
 
 verina_yellow_color = {
     'r': (240, 255),

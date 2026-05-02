@@ -3,6 +3,7 @@ import time
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：嘉贝莉娜
 class Galbrena(BaseChar):
 
     def do_perform(self):

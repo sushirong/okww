@@ -3,6 +3,7 @@ import time
 from src.char.Healer import Healer
 from src.char.BaseChar import BaseChar, Priority
 
+# 中文名：守岸人
 class ShoreKeeper(Healer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

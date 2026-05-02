@@ -1,6 +1,7 @@
 from src.char.BaseChar import BaseChar
 
 
+# 中文名：渊武
 class Yuanwu(BaseChar):
 
     def count_resonance_priority(self):

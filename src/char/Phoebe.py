@@ -15,6 +15,7 @@ class State(Enum):
     TIMEOUT = 3
 
 
+# 中文名：菲比
 class Phoebe(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

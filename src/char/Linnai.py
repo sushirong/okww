@@ -2,6 +2,7 @@ import time
 
 from src.char.BaseChar import BaseChar, forte_white_color, Priority
 
+# 中文名：琳奈
 class Linnai(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -6,6 +6,7 @@ from ok import color_range_to_bound
 from src.char.BaseChar import BaseChar, Priority, text_white_color
 
 
+# 中文名：折枝
 class Zhezhi(BaseChar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
